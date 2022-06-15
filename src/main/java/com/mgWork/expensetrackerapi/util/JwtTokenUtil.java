@@ -16,11 +16,13 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JwtTokenUtil {
 
-	private static final Long JWT_TOKEN_VALIDITY = 5*60*60l;
+	private static final long JWT_TOKEN_VALIDITY = 5*60*60;
 	@Value("${jwt.secret}")
 	private String secret;
 
+	
 	public String generateToken(UserDetails details) {
+//		System.out.println("----------"+secret+"--------------");
 		Map<String, Object> claims = new HashMap<>();
 		return Jwts.builder()
 			.setClaims(claims)
@@ -36,7 +38,9 @@ public class JwtTokenUtil {
 	}
 	
 	private <T> T getClaimFromToken(String token,Function<Claims, T> claimsResolver) {
+//		System.out.println(token+"----------");
 		final Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+//		System.out.println("--------------------"+claims+"-------------------------------------");
 		return claimsResolver.apply(claims);
 	}
 
