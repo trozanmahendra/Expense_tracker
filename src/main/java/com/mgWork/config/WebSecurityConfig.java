@@ -18,6 +18,7 @@ import com.mgWork.security.CustomUserDetailsService;
 import com.mgWork.security.JwtRequestFilter;
 
 //@SuppressWarnings("deprecation")
+@SuppressWarnings("deprecation")
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired

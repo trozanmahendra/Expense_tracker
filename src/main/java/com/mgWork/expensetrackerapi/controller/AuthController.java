@@ -34,8 +34,6 @@ public class AuthController {
 	private CustomUserDetailsService customUserDetailsService;
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
-	
-	
 
 	@PostMapping("/login")
 	public ResponseEntity<Jwtresponse> login(@RequestBody AuthModel authModel) throws Exception {
@@ -48,15 +46,14 @@ public class AuthController {
 		return new ResponseEntity<Jwtresponse>(new Jwtresponse(token), HttpStatus.OK);
 	}
 
-	private void authenticate(String email, String password) throws Exception{
+	private void authenticate(String email, String password) throws Exception {
 		try {
-			authenticationManager
-					.authenticate(new UsernamePasswordAuthenticationToken(email, password));
-			
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
+
 		} catch (DisabledException e) {
 
 			throw new Exception("User disabled");
-		}catch (BadCredentialsException e) {
+		} catch (BadCredentialsException e) {
 			throw new Exception("bad credentals");
 		}
 
